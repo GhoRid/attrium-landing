@@ -1,11 +1,11 @@
 "use client";
 
-import { useScrollReveal } from "@/hooks/useFadeUp";
-import { Lottie } from "lottie-react";
 import connection from "@/assets/lotties/connection.json";
 import folder from "@/assets/lotties/folder.json";
 import heart from "@/assets/lotties/heart.json";
 import star from "@/assets/lotties/star.json";
+import { useScrollReveal } from "@/hooks/useFadeUp";
+import { Lottie } from "lottie-react";
 
 const BENEFITS = [
   {
@@ -54,12 +54,9 @@ export default function BenefitsGrid() {
               key={benefit.title}
               className="flex h-[248px] flex-col items-start justify-between rounded-3xl bg-neutral-50 p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] 768:h-[320px] 768:p-10"
             >
-              <Lottie
-                src={benefit.lottie}
-                loop
-                autoplay
-                className="h-16 w-16 768:h-20 768:w-20 1024:h-[104px] 1024:w-[104px]"
-              />
+              <div className="h-16 w-16 768:h-20 768:w-20 1024:h-[104px] 1024:w-[104px]">
+                <Lottie src={benefit.lottie} loop autoplay />
+              </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-24 font-bold leading-[1.4] text-neutral-900">
                   {benefit.title}
