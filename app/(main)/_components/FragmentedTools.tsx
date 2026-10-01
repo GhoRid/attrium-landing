@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 const CARDS = [
   {
     src: bulletinImg.src,
-    aspect: "aspect-[960/1042]",
+    aspect: "aspect-960/1042",
     delay: "150ms",
     floatDuration: "4.2s",
     innerWidth: "90.2%",
@@ -20,7 +20,7 @@ const CARDS = [
   },
   {
     src: donationImg.src,
-    aspect: "aspect-[1200/1045]",
+    aspect: "aspect-1200/1045",
     delay: "300ms",
     floatDuration: "3.6s",
     innerWidth: "83.0%",
@@ -30,7 +30,7 @@ const CARDS = [
   },
   {
     src: personImg.src,
-    aspect: "aspect-[1120/1045]",
+    aspect: "aspect-1120/1045",
     delay: "450ms",
     floatDuration: "4.8s",
     innerWidth: "86.3%",
@@ -40,7 +40,7 @@ const CARDS = [
   },
   {
     src: talkImg.src,
-    aspect: "aspect-[960/974]",
+    aspect: "aspect-960/974",
     delay: "600ms",
     floatDuration: "4.5s",
     innerWidth: "79.2%",
@@ -110,9 +110,7 @@ function ScatterCard({
           animationTimingFunction: "ease-in-out",
           animationIterationCount: "infinite",
         }}
-        className={`transition-all duration-[900ms] ease-out ${
-          visible ? "opacity-100" : "opacity-0"
-        }`}
+        className={`transition-all duration-900 ease-out ${visible ? "opacity-100" : "opacity-0"}`}
       >
         <div
           style={{ transform: `rotate(${card.rotate})` }}
@@ -186,10 +184,6 @@ export default function FragmentedTools() {
     const wrapper = section?.parentElement;
     if (!section || !wrapper) return;
 
-    // The wrapper (section + the sibling that covers it) is normal flow, so
-    // its rect tracks scroll 1:1 regardless of the section's own stickiness —
-    // that's what lets us derive "how far into the pinned dwell are we"
-    // without needing to read the section's own (sticky-adjusted) position.
     const update = () => {
       const viewportH = window.innerHeight;
       const sectionH = section.offsetHeight;
@@ -217,10 +211,10 @@ export default function FragmentedTools() {
     <section
       ref={sectionRef}
       style={{ top: stickyTop }}
-      className="sticky overflow-hidden bg-neutral-900 py-16 768:py-[120px]"
+      className="sticky overflow-hidden bg-neutral-900 py-16 768:py-30"
     >
       <div
-        className="pointer-events-none absolute bottom-[-100px] left-1/2 h-[350px] w-[120%] -translate-x-1/2 rounded-full opacity-50 blur-3xl 768:w-[1620px]"
+        className="pointer-events-none absolute -bottom-25 left-1/2 h-87.5 w-[120%] -translate-x-1/2 rounded-full opacity-50 blur-3xl 768:w-[1620px]"
         style={{
           backgroundImage:
             "radial-gradient(closest-side, var(--color-primary-500) 0%, transparent 100%)",
@@ -229,7 +223,7 @@ export default function FragmentedTools() {
 
       <div className="relative mx-auto flex max-w-content flex-col gap-16 px-6">
         <div
-          className={`flex flex-col gap-6 transition-all duration-[1000ms] ease-out ${
+          className={`flex flex-col gap-6 transition-all duration-1000 ease-out ${
             visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >

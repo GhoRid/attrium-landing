@@ -4,11 +4,6 @@ import churchLogo from "@/assets/images/chunggwang-church-logo.webp";
 import AttriumLogo from "@/assets/svgs/logo.svg";
 import { useScrollReveal } from "@/hooks/useFadeUp";
 
-// A single logo, so the tile-and-shift-50% marquee trick (which needs a wide
-// repeated track) doesn't apply — the track would collapse to just the
-// logo's own width and barely move. Instead this animates `left` (not
-// `transform`) because percentages there resolve against the row's own
-// width, letting one logo cruise all the way across it.
 function LogoRow({ empty = false }: { empty?: boolean }) {
   return (
     <div className="relative h-20 w-full overflow-hidden 768:h-24">
@@ -21,8 +16,8 @@ function LogoRow({ empty = false }: { empty?: boolean }) {
           className="absolute top-1/2 h-8 w-auto -translate-y-1/2 animate-slide-across"
         />
       )}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-neutral-50 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-neutral-50 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-linear-to-r from-neutral-50 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-linear-to-l from-neutral-50 to-transparent" />
     </div>
   );
 }
@@ -33,10 +28,10 @@ export default function ChurchMarquee() {
   return (
     <section
       ref={sectionRef}
-      className="bg-neutral-50 py-16 768:py-[120px]"
+      className="bg-neutral-50 py-16 768:py-40"
     >
       <div
-        className={`mx-auto max-w-content px-6 transition-all duration-[1000ms] ease-out ${
+        className={`mx-auto max-w-content px-6 transition-all duration-1000 ease-out ${
           visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
       >

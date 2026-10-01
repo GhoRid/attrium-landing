@@ -32,7 +32,6 @@ export default function Header() {
     };
   }, []);
 
-  // Hide the header while scrolling down and reveal it again on scroll up.
   useEffect(() => {
     let lastY = window.scrollY;
 
@@ -81,7 +80,7 @@ export default function Header() {
           <button
             type="button"
             onClick={onOpenContact}
-            className="flex h-10 w-[96px] cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-500 px-4 text-16 font-bold text-neutral-0 transition-colors"
+            className="flex h-10 w-24 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-500 px-4 text-16 font-bold text-neutral-0 transition-colors"
           >
             도입 문의
           </button>

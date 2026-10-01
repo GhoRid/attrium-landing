@@ -1,21 +1,21 @@
 "use client";
 
-import { useScrollReveal } from '@/hooks/useFadeUp'
+import { useScrollReveal } from "@/hooks/useFadeUp";
 
 export default function PainPoint() {
-  const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>()
+  const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
   return (
     <section
       id="services"
       ref={sectionRef}
-      className="relative overflow-hidden bg-neutral-900 py-16 768:py-[120px]"
+      className="relative overflow-hidden bg-neutral-900 py-16 768:py-30"
     >
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[1900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-[1900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
         style={{
           backgroundImage:
-            'radial-gradient(closest-side, var(--color-primary-500) 0%, transparent 100%)',
+            "radial-gradient(closest-side, var(--color-primary-500) 0%, transparent 100%)",
         }}
       />
 
@@ -23,15 +23,15 @@ export default function PainPoint() {
         <h2 className="flex flex-col text-[2.5rem] font-extrabold leading-[1.4] text-neutral-0 768:text-56">
           <span
             className={`transition-all duration-700 ease-out ${
-              visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
             교회 운영은
           </span>
           <span
-            style={{ transitionDelay: '250ms' }}
+            style={{ transitionDelay: "250ms" }}
             className={`transition-all duration-700 ease-out ${
-              visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
             한 가지 일로 끝나지
@@ -39,9 +39,9 @@ export default function PainPoint() {
           </span>
         </h2>
         <p
-          style={{ transitionDelay: '500ms' }}
+          style={{ transitionDelay: "500ms" }}
           className={`text-24 leading-[1.6] tracking-[-0.03em] text-neutral-0/80 transition-all duration-700 ease-out ${
-            visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
           주보부터 헌금, 공지, 교인, 기도제목까지
@@ -49,5 +49,5 @@ export default function PainPoint() {
         </p>
       </div>
     </section>
-  )
+  );
 }

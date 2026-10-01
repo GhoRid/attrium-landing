@@ -36,10 +36,10 @@ export default function BenefitsGrid() {
   return (
     <section
       ref={sectionRef}
-      className="bg-neutral-0 py-16 768:py-[120px]"
+      className="bg-neutral-0 py-16 768:py-30"
     >
       <div
-        className={`mx-auto max-w-content px-6 transition-all duration-[1000ms] ease-out ${
+        className={`mx-auto max-w-content px-6 transition-all duration-1000 ease-out ${
           visible ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
       >
@@ -52,16 +52,20 @@ export default function BenefitsGrid() {
           {BENEFITS.map((benefit) => (
             <div
               key={benefit.title}
-              className="flex h-[248px] flex-col items-start justify-between rounded-3xl bg-neutral-50 p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] 768:h-[320px] 768:p-10"
+              className="flex h-62 flex-col items-start justify-between rounded-3xl bg-neutral-50 p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] 768:h-80 768:p-10"
             >
-              <div className="h-16 w-16 768:h-20 768:w-20 1024:h-[104px] 1024:w-[104px]">
-                <Lottie src={benefit.lottie} loop autoplay />
+              <div className="h-16 w-16 768:h-20 768:w-20 1024:h-26 1024:w-26">
+                <Lottie
+                  src={benefit.lottie}
+                  loop
+                  autoplay
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-24 font-bold leading-[1.4] text-neutral-900">
                   {benefit.title}
                 </h3>
-                <p className="whitespace-normal text-16 font-medium leading-[1.5] text-neutral-700 1024:whitespace-pre-line">
+                <p className="whitespace-normal text-16 font-medium leading-normal text-neutral-700 1024:whitespace-pre-line">
                   {benefit.body}
                 </p>
               </div>

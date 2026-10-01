@@ -140,14 +140,14 @@ export default function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="overflow-hidden py-16 768:py-[120px]"
+      className="overflow-hidden py-16 768:py-30"
     >
       <div
         className="flex flex-col items-start gap-6 pr-6 1024:flex-row 1024:pr-0"
         style={{ paddingLeft: "max(1.5rem, calc((100vw - 67.5rem) / 2 + 1.5rem))" }}
       >
         <div
-          className={`flex w-full flex-col items-start gap-12 transition-all duration-[1600ms] ease-out 1024:max-w-[480px] 1024:shrink-0 ${
+          className={`flex w-full flex-col items-start gap-12 transition-all duration-1600 ease-out 1024:max-w-120 1024:shrink-0 ${
             visible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
           }`}
         >
@@ -164,7 +164,10 @@ export default function Testimonials() {
                 aria-label="이전 후기"
                 className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-neutral-100 hover:bg-neutral-50"
               >
-                <ChevronLeft aria-hidden="true" className="h-6 w-6" />
+                <ChevronLeft
+                  aria-hidden="true"
+                  className="h-6 w-6"
+                />
               </button>
               <button
                 type="button"
@@ -172,14 +175,17 @@ export default function Testimonials() {
                 aria-label="다음 후기"
                 className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-neutral-100 hover:bg-neutral-50"
               >
-                <ChevronRight aria-hidden="true" className="h-6 w-6" />
+                <ChevronRight
+                  aria-hidden="true"
+                  className="h-6 w-6"
+                />
               </button>
             </div>
 
             <div className="flex w-full flex-col items-start gap-6 rounded-3xl bg-neutral-50 p-8 768:gap-8 768:p-10">
               <div className="flex w-full flex-col items-start gap-4 768:gap-6">
                 <QuoteMark aria-hidden="true" />
-                <div className="flex w-full flex-col items-start gap-2 leading-[1.5]">
+                <div className="flex w-full flex-col items-start gap-2 leading-normal">
                   <p className="line-clamp-1 w-full text-18 font-bold text-neutral-900">
                     {testimonial.title}
                   </p>
@@ -197,7 +203,7 @@ export default function Testimonials() {
 
         <div
           ref={carouselRef}
-          className="aspect-[9/10] w-full min-w-0 overflow-hidden 1024:aspect-auto 1024:h-auto 1024:flex-1 1024:self-stretch"
+          className="aspect-9/10 w-full min-w-0 overflow-hidden 1024:aspect-auto 1024:h-auto 1024:flex-1 1024:self-stretch"
         >
           <div
             className={`flex h-full gap-4 ${animate ? "transition-transform duration-300 ease-in-out" : ""}`}
@@ -207,7 +213,7 @@ export default function Testimonials() {
               <div
                 key={`${t.name}-${i}`}
                 style={{ transitionDelay: `${i * 150}ms` }}
-                className={`flex h-full w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-neutral-100 transition-all duration-[1000ms] ease-out 768:rounded-3xl 1024:w-[480px] ${
+                className={`flex h-full w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-neutral-100 transition-all duration-1000 ease-out 768:rounded-3xl 1024:w-120 ${
                   visible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
                 }`}
               >
