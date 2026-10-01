@@ -1,5 +1,5 @@
-import heroImg from '@/assets/svgs/hero.webp'
-import onePlaceImg from '@/assets/images/one-place.webp'
+import heroImg from "@/assets/images/hero.webp";
+import onePlaceImg from "@/assets/images/one-place.webp";
 
 export default function Hero() {
   return (
@@ -30,5 +30,5 @@ export default function Hero() {
         className="pointer-events-none relative left-1/2 mt-10 w-[92%] max-w-none -translate-x-1/2 flex-none object-contain object-bottom 768:mt-20 768:w-[117%] 768:min-h-0 768:flex-1"
       />
     </section>
-  )
+  );
 }
