@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "SUIT Variable";
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/SUIT-Variable.woff2") format("woff2-variations");
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --font-sans: "SUIT Variable", system-ui, "Segoe UI", Roboto, sans-serif;
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafc;
+  --color-neutral-75: #f6f6f9;
+  --color-neutral-100: #f2f2f6;
+  --color-neutral-200: #e4e4eb;
+  --color-neutral-300: #ccccd7;
+  --color-neutral-400: #a2a1b0;
+  --color-neutral-500: #807f90;
+  --color-neutral-600: #626172;
+  --color-neutral-700: #4a4956;
+  --color-neutral-800: #35343f;
+  --color-neutral-900: #24232b;
+  --color-neutral-950: #17161d;
+
+  --color-primary-50: #f3faff;
+  --color-primary-100: #e6f4ff;
+  --color-primary-200: #cde8ff;
+  --color-primary-300: #a8d5ff;
+  --color-primary-400: #74bcff;
+  --color-primary-500: #3ba7ff;
+  --color-primary-600: #1f8ef1;
+  --color-primary-700: #1672cc;
+  --color-primary-800: #165ca5;
+  --color-primary-900: #164e84;
+  --color-primary-950: #113255;
+
+  --text-14: 0.875rem;
+  --text-14--line-height: 1.5;
+  --text-16: 1rem;
+  --text-16--line-height: 1.6;
+  --text-18: 1.125rem;
+  --text-18--line-height: 1.5;
+  --text-24: 1.5rem;
+  --text-24--line-height: 1.4;
+  --text-32: 2rem;
+  --text-32--line-height: 1.4;
+  --text-40: 2.5rem;
+  --text-40--line-height: 1.4;
+  --text-48: 3rem;
+  --text-48--line-height: 1.4;
+  --text-56: 3.5rem;
+  --text-56--line-height: 1.4;
+
+  --container-content: 67.5rem;
+
+  --breakpoint-sm: initial;
+  --breakpoint-md: initial;
+  --breakpoint-lg: initial;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
+  --breakpoint-768: 48rem;
+  --breakpoint-1024: 64rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: var(--color-neutral-50);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply text-neutral-700 antialiased;
+  min-width: 300px;
+}
+
+@media (width < 48rem) {
+  :root {
+    --text-14: 0.8125rem;
+    --text-16: 0.875rem;
+    --text-18: 1rem;
+    --text-24: 1.125rem;
+    --text-32: 1.5rem;
+    --text-40: 2rem;
+    --text-48: 2.5rem;
+    --text-56: 3rem;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slide-across {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -100px;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-slide-across {
+    animation: slide-across 30s linear infinite;
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

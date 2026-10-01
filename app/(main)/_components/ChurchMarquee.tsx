@@ -1,0 +1,55 @@
+"use client";
+
+import AttriumLogo from '@/assets/svgs/logo.svg'
+import churchLogo from '@/assets/images/chunggwang-church-logo.webp'
+import { useScrollReveal } from '@/hooks/useFadeUp'
+
+// A single logo, so the tile-and-shift-50% marquee trick (which needs a wide
+// repeated track) doesn't apply — the track would collapse to just the
+// logo's own width and barely move. Instead this animates `left` (not
+// `transform`) because percentages there resolve against the row's own
+// width, letting one logo cruise all the way across it.
+function LogoRow({ empty = false }: { empty?: boolean }) {
+  return (
+    <div className="relative h-20 w-full overflow-hidden 768:h-24">
+      {!empty && (
+        <img
+          src={churchLogo.src}
+          alt="협력 교회 로고"
+          width={95}
+          height={32}
+          className="absolute top-1/2 h-8 w-auto -translate-y-1/2 animate-slide-across"
+        />
+      )}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-neutral-50 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-neutral-50 to-transparent" />
+    </div>
+  )
+}
+
+export default function ChurchMarquee() {
+  const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>()
+
+  return (
+    <section ref={sectionRef} className="bg-neutral-50 py-16 768:py-[120px]">
+      <div
+        className={`mx-auto max-w-content px-6 transition-all duration-[1000ms] ease-out ${
+          visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        }`}
+      >
+        <h2 className="flex flex-wrap items-center justify-center gap-x-4 text-center text-40 font-extrabold leading-[1.4] tracking-tight text-neutral-900">
+          <AttriumLogo role="img" aria-label="Attrium" className="h-6 w-auto 768:h-8" />
+          <span>은 교회와 함께</span>
+          {' '}
+          <span className="block basis-full 1024:hidden" />
+          <span>더 나은 내일을 만듭니다.</span>
+        </h2>
+
+        <div className="mt-10 flex flex-col gap-4 768:mt-16 768:gap-6">
+          <LogoRow />
+          <LogoRow empty />
+        </div>
+      </div>
+    </section>
+  )
+}
