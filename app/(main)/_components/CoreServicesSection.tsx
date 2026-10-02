@@ -4,7 +4,7 @@ import bulletin from "@/assets/images/core-service-bulletin.webp";
 import donation from "@/assets/images/core-service-donation.webp";
 import notice from "@/assets/images/core-service-notice.webp";
 import pray from "@/assets/images/core-service-pray.webp";
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useState } from "react";
 
 const SERVICES = [
@@ -38,10 +38,10 @@ const SERVICES = [
   },
 ];
 
-export default function CoreServices() {
-  const [active, setActive] = useState(0);
+export default function CoreServicesSection() {
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
-  const service = SERVICES[active];
+  const activeService = SERVICES[activeServiceIndex];
 
   return (
     <section
@@ -65,24 +65,24 @@ export default function CoreServices() {
               className="w-4 shrink-0"
               aria-hidden="true"
             />
-            {SERVICES.map((item, i) => (
+            {SERVICES.map((service, index) => (
               <button
-                key={item.label}
+                key={service.label}
                 type="button"
-                onClick={() => setActive(i)}
+                onClick={() => setActiveServiceIndex(index)}
                 style={{
                   transitionProperty: "transform, opacity, background-color, color, border-color",
                   transitionDuration: "800ms, 800ms, 150ms, 150ms, 150ms",
                   transitionTimingFunction: "ease-out",
-                  transitionDelay: `${400 + i * 150}ms, ${400 + i * 150}ms, 0ms, 0ms, 0ms`,
+                  transitionDelay: `${400 + index * 150}ms, ${400 + index * 150}ms, 0ms, 0ms, 0ms`,
                 }}
                 className={`flex h-12 shrink-0 cursor-pointer items-center justify-center rounded-full px-4 text-16 font-bold whitespace-nowrap ${
                   visible ? "translate-x-0 opacity-100" : "translate-x-6 opacity-0"
                 } ${
-                  i === active ? "bg-primary-500 text-neutral-0" : "bg-neutral-75 text-neutral-700"
+                  index === activeServiceIndex ? "bg-primary-500 text-neutral-0" : "bg-neutral-75 text-neutral-700"
                 }`}
               >
-                {item.label}
+                {service.label}
               </button>
             ))}
             <div
@@ -99,32 +99,32 @@ export default function CoreServices() {
         >
           <div className="flex flex-col gap-4 768:h-auto 768:min-h-60 768:justify-between 768:gap-0 768:rounded-3xl 768:bg-neutral-75 768:p-9 1024:h-90">
             <p className="text-48 font-extrabold leading-normal text-primary-500">
-              {service.number}
+              {activeService.number}
             </p>
             <div className="flex flex-col gap-2">
-              <p className="text-24 font-bold leading-[1.4] text-neutral-900">{service.title}</p>
+              <p className="text-24 font-bold leading-[1.4] text-neutral-900">{activeService.title}</p>
               <p className="whitespace-pre-line text-16 font-medium leading-normal text-neutral-700">
-                {service.body}
+                {activeService.body}
               </p>
             </div>
           </div>
 
           <div className="relative -mx-6 aspect-2/1 overflow-hidden bg-neutral-100 768:mx-0 768:rounded-3xl 1024:aspect-auto">
-            {SERVICES.map((item, i) => {
-              const offset = i - active;
+            {SERVICES.map((service, index) => {
+              const offset = index - activeServiceIndex;
               return (
                 <div
-                  key={item.label}
+                  key={service.label}
                   className="absolute inset-0 transition-all duration-150 ease-in-out"
                   style={{
                     transform: `translateY(${offset === 0 ? 0 : offset > 0 ? 40 : -40}px)`,
                     opacity: offset === 0 ? 1 : 0,
                   }}
                 >
-                  {item.image && (
+                  {service.image && (
                     <img
-                      src={item.image}
-                      alt={item.title}
+                      src={service.image}
+                      alt={service.title}
                       className="h-full w-full object-cover"
                     />
                   )}

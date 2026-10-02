@@ -1,10 +1,10 @@
 "use client";
 
 import gradient from "@/assets/images/gradient.webp";
-import { useContactModal } from "@/store/contactModal.store";
+import { useContactModal } from "@/components/ContactModalProvider";
 
-export default function MidCTA() {
-  const onOpenContact = useContactModal();
+export default function MidCTASection() {
+  const openContactModal = useContactModal();
   return (
     <section
       id="contact"
@@ -22,7 +22,7 @@ export default function MidCTA() {
       <div className="flex flex-col items-center gap-2 768:flex-row 768:gap-4">
         <button
           type="button"
-          onClick={onOpenContact}
+          onClick={openContactModal}
           className="flex h-14 w-40 cursor-pointer items-center justify-center rounded-full text-16 font-semibold text-neutral-0 tracking-[-0.48px]"
           style={{
             backgroundImage:

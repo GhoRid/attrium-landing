@@ -3,7 +3,7 @@
 import admin from "@/assets/images/operations-admin.webp";
 import kiosk from "@/assets/images/operations-kiosk.webp";
 import mobile from "@/assets/images/operations-mobile.webp";
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const CHANNELS = [
   {
@@ -23,7 +23,7 @@ const CHANNELS = [
   },
 ];
 
-export default function OperationsShowcase() {
+export default function OperationsShowcaseSection() {
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
   return (

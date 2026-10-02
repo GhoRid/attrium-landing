@@ -1,31 +1,31 @@
-import BenefitsGrid from "@/app/(main)/_components/BenefitsGrid";
-import ChurchMarquee from "@/app/(main)/_components/ChurchMarquee";
-import CoreServices from "@/app/(main)/_components/CoreServices";
-import FAQ from "@/app/(main)/_components/FAQ";
-import FragmentedTools from "@/app/(main)/_components/FragmentedTools";
+import BenefitsGridSection from "@/app/(main)/_components/BenefitsGridSection";
+import ChurchMarqueeSection from "@/app/(main)/_components/ChurchMarqueeSection";
+import CoreServicesSection from "@/app/(main)/_components/CoreServicesSection";
+import FAQSection from "@/app/(main)/_components/FAQSection";
+import FragmentedToolsSection from "@/app/(main)/_components/FragmentedToolsSection";
 import HeroSection from "@/app/(main)/_components/HeroSection";
-import MidCTA from "@/app/(main)/_components/MidCTA";
-import OnePlace from "@/app/(main)/_components/OnePlace";
-import OperationsShowcase from "@/app/(main)/_components/OperationsShowcase";
-import PainPoint from "@/app/(main)/_components/PainPoint";
-import Testimonials from "@/app/(main)/_components/Testimonials";
+import MidCTASection from "@/app/(main)/_components/MidCTASection";
+import OnePlaceSection from "@/app/(main)/_components/OnePlaceSection";
+import OperationsShowcaseSection from "@/app/(main)/_components/OperationsShowcaseSection";
+import PainPointSection from "@/app/(main)/_components/PainPointSection";
+import TestimonialsSection from "@/app/(main)/_components/TestimonialsSection";
 
 export default function MainPage() {
   return (
     <div>
       <HeroSection />
-      <PainPoint />
+      <PainPointSection />
       <div className="relative">
-        <FragmentedTools />
-        <OnePlace />
+        <FragmentedToolsSection />
+        <OnePlaceSection />
       </div>
-      <BenefitsGrid />
-      <OperationsShowcase />
-      <CoreServices />
-      <Testimonials />
-      <ChurchMarquee />
-      <FAQ />
-      <MidCTA />
+      <BenefitsGridSection />
+      <OperationsShowcaseSection />
+      <CoreServicesSection />
+      <TestimonialsSection />
+      <ChurchMarqueeSection />
+      <FAQSection />
+      <MidCTASection />
     </div>
   );
 }

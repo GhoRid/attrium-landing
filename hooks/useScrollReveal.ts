@@ -9,8 +9,8 @@ export function useScrollReveal<T extends HTMLElement>(threshold = 0.15) {
   const ref = useRef<T>(null)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
+    const element = ref.current
+    if (!element) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -22,7 +22,7 @@ export function useScrollReveal<T extends HTMLElement>(threshold = 0.15) {
       { threshold },
     )
 
-    observer.observe(el)
+    observer.observe(element)
     return () => observer.disconnect()
   }, [threshold])
 

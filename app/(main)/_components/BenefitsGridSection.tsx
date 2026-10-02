@@ -4,7 +4,7 @@ import connection from "@/assets/lotties/connection.json";
 import folder from "@/assets/lotties/folder.json";
 import heart from "@/assets/lotties/heart.json";
 import star from "@/assets/lotties/star.json";
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Lottie } from "lottie-react";
 
 const BENEFITS = [
@@ -30,7 +30,7 @@ const BENEFITS = [
   },
 ];
 
-export default function BenefitsGrid() {
+export default function BenefitsGridSection() {
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
   return (

@@ -2,7 +2,7 @@
 
 import churchLogo from "@/assets/images/chunggwang-church-logo.webp";
 import AttriumLogo from "@/assets/svgs/logo.svg";
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 function LogoRow({ empty = false }: { empty?: boolean }) {
   return (
@@ -22,7 +22,7 @@ function LogoRow({ empty = false }: { empty?: boolean }) {
   );
 }
 
-export default function ChurchMarquee() {
+export default function ChurchMarqueeSection() {
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
   return (

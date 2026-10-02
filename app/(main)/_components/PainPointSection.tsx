@@ -1,8 +1,8 @@
 "use client";
 
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-export default function PainPoint() {
+export default function PainPointSection() {
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
   return (

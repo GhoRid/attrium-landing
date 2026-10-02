@@ -4,7 +4,7 @@ import bulletinImg from "@/assets/images/fragmented-bulletin.webp";
 import donationImg from "@/assets/images/fragmented-donation.webp";
 import talkImg from "@/assets/images/fragmented-group-chat.webp";
 import personImg from "@/assets/images/fragmented-member-list.webp";
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useEffect, useState } from "react";
 
 const CARDS = [
@@ -50,20 +50,19 @@ const CARDS = [
   },
 ];
 
-// While the section is pinned (see `stuckProgress` below), each card sinks
+// While the section is pinned (see `collapseProgress` below), each card sinks
 // toward the canvas's bottom-center and shrinks/fades away — `dx`/`dy` are in
 // %-of-the-card's-own-box (what `translate()` resolves against), computed
 // from its center so every card actually converges on the same target point
 // regardless of its own size or starting position.
-function sinkStyle(
-  pos: { left: string; top: string; width: string; height: string },
+function getSinkStyle(
+  position: { left: string; top: string; width: string; height: string },
   progress: number,
 ) {
-  const num = (s: string) => parseFloat(s);
-  const width = num(pos.width);
-  const height = num(pos.height);
-  const centerX = num(pos.left) + width / 2;
-  const centerY = num(pos.top) + height / 2;
+  const width = parseFloat(position.width);
+  const height = parseFloat(position.height);
+  const centerX = parseFloat(position.left) + width / 2;
+  const centerY = parseFloat(position.top) + height / 2;
   const dx = ((50 - centerX) / width) * 100 * progress;
   const dy = ((100 - centerY) / height) * 100 * progress;
   const scale = 1 - progress * 0.7;
@@ -79,13 +78,13 @@ function ScatterCard({
   positions,
   zIndex,
   visible,
-  stuckProgress,
+  collapseProgress,
 }: {
   card: (typeof CARDS)[number];
   positions: "mobile" | "desktop";
   zIndex: number;
   visible: boolean;
-  stuckProgress: number;
+  collapseProgress: number;
 }) {
   const [floating, setFloating] = useState(false);
 
@@ -98,7 +97,7 @@ function ScatterCard({
   return (
     <div
       className="absolute flex items-center justify-center"
-      style={{ ...card[positions], zIndex, ...sinkStyle(card[positions], stuckProgress) }}
+      style={{ ...card[positions], zIndex, ...getSinkStyle(card[positions], collapseProgress) }}
     >
       <div
         style={{
@@ -131,51 +130,51 @@ function ScatterCanvas({
   aspectRatio,
   positions,
   visible,
-  stuckProgress,
+  collapseProgress,
 }: {
   aspectRatio: string;
   positions: "mobile" | "desktop";
   visible: boolean;
-  stuckProgress: number;
+  collapseProgress: number;
 }) {
   return (
     <div
       className="relative w-full"
       style={{ aspectRatio }}
     >
-      {CARDS.map((card, i) => (
+      {CARDS.map((card, index) => (
         <ScatterCard
           key={card.src}
           card={card}
           positions={positions}
-          zIndex={i + 1}
+          zIndex={index + 1}
           visible={visible}
-          stuckProgress={stuckProgress}
+          collapseProgress={collapseProgress}
         />
       ))}
     </div>
   );
 }
 
-export default function FragmentedTools() {
+export default function FragmentedToolsSection() {
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
-  const [stickyTop, setStickyTop] = useState("0px");
-  const [stuckProgress, setStuckProgress] = useState(0);
+  const [stickyTopOffset, setStickyTopOffset] = useState("0px");
+  const [collapseProgress, setCollapseProgress] = useState(0);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    const update = () => setStickyTop(`calc(100vh - ${el.offsetHeight}px)`);
-    update();
+    const updateStickyTopOffset = () => setStickyTopOffset(`calc(100vh - ${section.offsetHeight}px)`);
+    updateStickyTopOffset();
 
-    const observer = new ResizeObserver(update);
-    observer.observe(el);
-    window.addEventListener("resize", update);
+    const observer = new ResizeObserver(updateStickyTopOffset);
+    observer.observe(section);
+    window.addEventListener("resize", updateStickyTopOffset);
     return () => {
       observer.disconnect();
-      window.removeEventListener("resize", update);
+      window.removeEventListener("resize", updateStickyTopOffset);
     };
   }, [sectionRef]);
 
@@ -184,33 +183,33 @@ export default function FragmentedTools() {
     const wrapper = section?.parentElement;
     if (!section || !wrapper) return;
 
-    const update = () => {
-      const viewportH = window.innerHeight;
-      const sectionH = section.offsetHeight;
-      const dwellRange = wrapper.offsetHeight - sectionH;
+    const updateCollapseProgress = () => {
+      const viewportHeight = window.innerHeight;
+      const sectionHeight = section.offsetHeight;
+      const dwellRange = wrapper.offsetHeight - sectionHeight;
       if (dwellRange <= 0) {
-        setStuckProgress(0);
+        setCollapseProgress(0);
         return;
       }
       const naturalTop = wrapper.getBoundingClientRect().top;
-      const stuckThreshold = viewportH - sectionH;
+      const stuckThreshold = viewportHeight - sectionHeight;
       const progress = (stuckThreshold - naturalTop) / dwellRange;
-      setStuckProgress(Math.min(1, Math.max(0, progress)));
+      setCollapseProgress(Math.min(1, Math.max(0, progress)));
     };
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    updateCollapseProgress();
+    window.addEventListener("scroll", updateCollapseProgress, { passive: true });
+    window.addEventListener("resize", updateCollapseProgress);
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", updateCollapseProgress);
+      window.removeEventListener("resize", updateCollapseProgress);
     };
   }, [sectionRef]);
 
   return (
     <section
       ref={sectionRef}
-      style={{ top: stickyTop }}
+      style={{ top: stickyTopOffset }}
       className="sticky overflow-hidden bg-neutral-900 py-16 768:py-30"
     >
       <div
@@ -244,7 +243,7 @@ export default function FragmentedTools() {
             aspectRatio="327 / 1143"
             positions="mobile"
             visible={visible}
-            stuckProgress={stuckProgress}
+            collapseProgress={collapseProgress}
           />
         </div>
         <div className="hidden 768:block">
@@ -252,7 +251,7 @@ export default function FragmentedTools() {
             aspectRatio="1080 / 1878"
             positions="desktop"
             visible={visible}
-            stuckProgress={stuckProgress}
+            collapseProgress={collapseProgress}
           />
         </div>
       </div>

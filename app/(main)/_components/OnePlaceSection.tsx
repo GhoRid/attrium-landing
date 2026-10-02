@@ -1,9 +1,9 @@
 "use client";
 
 import onePlaceImg from "@/assets/images/one-place.webp";
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-export default function OnePlace() {
+export default function OnePlaceSection() {
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
   return (

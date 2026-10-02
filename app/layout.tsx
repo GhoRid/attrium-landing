@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import type { Metadata } from "next";
-import { ContactModalProvider } from "@/store/contactModal.store";
+import { ContactModalProvider } from "@/components/ContactModalProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {

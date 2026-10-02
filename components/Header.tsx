@@ -1,7 +1,7 @@
 "use client";
 
 import Logo from "@/assets/svgs/logo.svg";
-import { useContactModal } from "@/store/contactModal.store";
+import { useContactModal } from "@/components/ContactModalProvider";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
@@ -11,16 +11,16 @@ const NAV_ITEMS = [
 ];
 
 export default function Header() {
-  const onOpenContact = useContactModal();
-  const [overHero, setOverHero] = useState(true);
-  const [hidden, setHidden] = useState(false);
+  const openContactModal = useContactModal();
+  const [isOverHero, setIsOverHero] = useState(true);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    const heroEl = document.getElementById("top");
+    const heroSection = document.getElementById("top");
 
     const updateOverHero = () => {
-      const heroHeight = heroEl?.offsetHeight ?? 0;
-      setOverHero(window.scrollY < heroHeight);
+      const heroHeight = heroSection?.offsetHeight ?? 0;
+      setIsOverHero(window.scrollY < heroHeight);
     };
 
     updateOverHero();
@@ -38,9 +38,9 @@ export default function Header() {
     const onScroll = () => {
       const currentY = window.scrollY;
       if (currentY > lastY && currentY > 80) {
-        setHidden(true);
+        setIsHidden(true);
       } else {
-        setHidden(false);
+        setIsHidden(false);
       }
       lastY = currentY;
     };
@@ -52,8 +52,8 @@ export default function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 backdrop-blur-xl transition-all duration-500 ease-in-out ${
-        overHero ? "" : "bg-neutral-0/20"
-      } ${hidden ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"}`}
+        isOverHero ? "" : "bg-neutral-0/20"
+      } ${isHidden ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"}`}
     >
       <div className="mx-auto flex h-18 max-w-content items-center justify-between px-6">
         <a href="#top">
@@ -79,7 +79,7 @@ export default function Header() {
 
           <button
             type="button"
-            onClick={onOpenContact}
+            onClick={openContactModal}
             className="flex h-10 w-24 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-primary-500 px-4 text-16 font-bold text-neutral-0 transition-colors"
           >
             도입 문의

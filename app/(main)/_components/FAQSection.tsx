@@ -1,7 +1,7 @@
 "use client";
 
 import { ExpandIcon } from "@/components/Icons";
-import { useScrollReveal } from "@/hooks/useFadeUp";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useState } from "react";
 
 const FAQS = [
@@ -32,8 +32,8 @@ const FAQS = [
   },
 ];
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+export default function FAQSection() {
+  const [openQuestionIndex, setOpenQuestionIndex] = useState<number | null>(null);
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>();
 
   return (
@@ -53,7 +53,7 @@ export default function FAQ() {
 
         <div className="mt-12 divide-y divide-neutral-100">
           {FAQS.map((faq, index) => {
-            const isOpen = openIndex === index;
+            const isOpen = openQuestionIndex === index;
             return (
               <div
                 key={faq.question}
@@ -64,7 +64,7 @@ export default function FAQ() {
               >
                 <button
                   type="button"
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  onClick={() => setOpenQuestionIndex(isOpen ? null : index)}
                   className="flex w-full cursor-pointer items-center justify-between gap-4 py-6 text-left"
                   aria-expanded={isOpen}
                 >
