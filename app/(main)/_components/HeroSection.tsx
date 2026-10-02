@@ -1,7 +1,7 @@
 import heroImg from "@/assets/images/hero.webp";
 import onePlaceImg from "@/assets/images/one-place.webp";
 
-export default function Hero() {
+export default function HeroSection() {
   return (
     <section
       id="top"

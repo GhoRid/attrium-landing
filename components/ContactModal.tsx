@@ -16,8 +16,6 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
     if (!open) return;
     const previousFocus =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     dialogRef.current?.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -48,7 +46,6 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
       previousFocus?.focus();
     };
   }, [open, onClose]);
